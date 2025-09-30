@@ -5,16 +5,16 @@ import StatusComponent         from "@/components/StatusComponent/StatusComponen
 import { posts }               from "@/data/postData";
 import { statusData }          from "@/data/statusData";
 
-// ✅ FIX 1: Import Swiper core styles so it lays out horizontally
+// Swiper
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/autoplay';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, FreeMode }  from 'swiper/modules';
 
-// import PostComponent           from '../PostComponent/PostComponent';
 import PostComponent           from '../../PostComponent/PostComponent';
+import { useTheme }            from '@/components/context/ThemeContext';
+// import { useTheme }            from '@/context/ThemeContext';
 
 // Close icon component
 const CloseIcon = ({ className = 'text-white' }) => (
@@ -37,32 +37,23 @@ const CloseIcon = ({ className = 'text-white' }) => (
 
 export default function DashboardContent() {
   const [selectedStatus, setSelectedStatus] = useState(null);
+  const { isDark } = useTheme();
 
-  const handleStatusClick = (status) => {
-    setSelectedStatus(status);
-  };
-
-  const handleCloseStatus = () => {
-    setSelectedStatus(null);
-  };
+  const handleStatusClick = (status) => setSelectedStatus(status);
+  const handleCloseStatus = () => setSelectedStatus(null);
 
   return (
-    <div className="mx-auto w-full flex flex-col items-center relative">
+    <div className={`mx-auto w-full flex flex-col items-center relative ${isDark ? 'bg-zinc-900 text-white' : 'bg-white text-black'}`}>
       {/* Status Reel Container */}
-      <div className="w-full max-w-[900px] border border-gray-200 py-3 mb-6 bg-white sticky top-0 z-10">
+      <div className={`w-full max-w-[600px] border-b py-3 mb-6 sticky top-0 z-10 ${isDark ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-white'}`}>
         <div className="px-2">
-          {/* ✅ FIX 2: Added proper modules + horizontal settings */}
           <Swiper
             modules={[Autoplay, FreeMode]}
             spaceBetween={10}
             slidesPerView="auto"
-            freeMode={true}
-            loop={true}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
-            // ✅ FIX 3: Ensure Swiper stays horizontal
+            freeMode
+            loop
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
             direction="horizontal"
             className="w-full h-full"
           >

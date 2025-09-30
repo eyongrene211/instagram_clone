@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+   @keyframes popoverIn {
+          0% { opacity: 0; transform: translateX(-10px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-popover-in {
+          animation: popoverIn 0.25s ease-out forwards;
+        }

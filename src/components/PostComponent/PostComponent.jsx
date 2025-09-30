@@ -1,105 +1,97 @@
-// components/Post/PostComponent.jsx (Updated to use props)
+'use client';
 
 import React                   from 'react';
-// Assuming you have installed the required icons:
 import { CiHeart, CiBookmark } from 'react-icons/ci';
 import { BsChat, BsSend }      from 'react-icons/bs';
-import { RxDotsHorizontal }    from 'react-icons/rx'; 
-// Use the Image component for optimized images (if using Next.js)
-import Image                   from 'next/image'; 
+import { RxDotsHorizontal }    from 'react-icons/rx';
+import Image                   from 'next/image';
+import { useTheme }            from '../context/ThemeContext';
 
 export default function PostComponent({
-    username,
-    avatarSrc,
-    location,
-    postSrc,
-    likesCount,
-    caption,
-    commentsCount,
-    timeAgo
+  username,
+  avatarSrc,
+  location,
+  postSrc,
+  likesCount,
+  caption,
+  commentsCount,
+  timeAgo
 }) {
+  const { isDark } = useTheme();
 
   return (
-    // Max width of 480px (standard Instagram feed size)
-    <div className="max-w-[480px] w-full border border-gray-200 sm:border-none mb-8 bg-white rounded-lg sm:rounded-none">
-      
-      {/* 1. Header (User Info and Options) */}
+    <div className={`max-w-[480px] w-full mb-8 rounded-lg sm:rounded-none
+       ${isDark ? 'border-[#3f3f46] bg-[#0D0D0EFF]' : 'border-gray-200 bg-white'}`}
+    >
+      {/* 1. Header */}
       <div className="flex items-center justify-between p-3">
         <div className="flex items-center space-x-3">
-          {/* Avatar Image */}
-          <div className="w-8 h-8 rounded-full flex-shrink-0 relative overflow-hidden">
-             {/* Use the Image component for the profile picture */}
-             <Image 
-                src={avatarSrc} 
-                alt={`${username}'s avatar`} 
-                fill 
-                sizes="32px"
-                className="object-cover"
-             />
+          <div className="w-8 h-8 rounded-full relative overflow-hidden">
+            <Image 
+              src={avatarSrc} 
+              alt={`${username}'s avatar`} 
+              fill 
+              sizes="32px"
+              className="object-cover"
+            />
           </div>
           <div>
-            <span className="font-semibold text-sm cursor-pointer">{username}</span>
-            {location && <p className="text-xs text-gray-500">{location}</p>}
+            <span className={`font-semibold text-sm cursor-pointer ${isDark ? 'text-white' : 'text-black'}`}>
+              {username}
+            </span>
+            {location && <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{location}</p>}
           </div>
         </div>
-        {/* Options Icon */}
-        <RxDotsHorizontal size={20} className="text-gray-700 cursor-pointer" />
+        <RxDotsHorizontal size={20} className={`${isDark ? 'text-white' : 'text-gray-700'} cursor-pointer`} />
       </div>
 
-      {/* 2. Media Area (Image) */}
+      {/* 2. Media Area */}
       <div className="w-full relative aspect-[4/5] bg-gray-200">
-        {/* Use the Image component for the main post image */}
         <Image 
-            src={postSrc} 
-            alt={`Post by ${username}`} 
-            fill 
-            sizes="(max-width: 640px) 100vw, 480px"
-            className="object-cover"
+          src={postSrc} 
+          alt={`Post by ${username}`} 
+          fill 
+          sizes="(max-width: 640px) 100vw, 480px"
+          className="object-cover"
         />
       </div>
 
-      {/* 3. Action Icons & Likes */}
+      {/* 3. Actions & Likes */}
       <div className="p-3">
-        {/* Action Icons */}
         <div className="flex justify-between items-center mb-2">
           <div className="flex space-x-4 text-2xl">
-            <CiHeart className="cursor-pointer hover:text-red-500 transition" />
-            <BsChat className="cursor-pointer hover:text-gray-700 transition" />
-            <BsSend className="cursor-pointer hover:text-gray-700 transition" /> 
+            <CiHeart className={`cursor-pointer transition ${isDark ? 'hover:text-red-500' : 'hover:text-red-500'}`} />
+            <BsChat className={`cursor-pointer transition ${isDark ? 'hover:text-gray-300' : 'hover:text-gray-700'}`} />
+            <BsSend className={`cursor-pointer transition ${isDark ? 'hover:text-gray-300' : 'hover:text-gray-700'}`} />
           </div>
-          {/* Bookmark/Save Icon */}
-          <CiBookmark size={24} className="cursor-pointer hover:text-gray-700 transition" /> 
+          <CiBookmark size={24} className={`cursor-pointer transition ${isDark ? 'hover:text-gray-300' : 'hover:text-gray-700'}`} />
         </div>
 
-        {/* Likes Count */}
-        <p className="font-semibold text-sm mb-2">{likesCount.toLocaleString()} likes</p>
+        <p className={`font-semibold text-sm mb-2 ${isDark ? 'text-white' : 'text-black'}`}>{likesCount.toLocaleString()} likes</p>
 
-        {/* Caption */}
-        <p className="text-sm">
+        <p className={`text-sm ${isDark ? 'text-white' : 'text-black'}`}>
           <span className="font-semibold mr-1">{username}</span>
           {caption}
         </p>
 
-        {/* View Comments Link */}
         {commentsCount > 0 && (
-            <p className="text-sm text-gray-500 mt-1 cursor-pointer">
-                View all {commentsCount.toLocaleString()} comments
-            </p>
+          <p className={`text-sm mt-1 cursor-pointer ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+            View all {commentsCount.toLocaleString()} comments
+          </p>
         )}
       </div>
 
-      {/* 4. Comment Field Space */}
-      <div className="px-3 py-2 border-t border-gray-200">
+      {/* 4. Comment Field */}
+      <div className={`px-3 py-2 border-t ${isDark ? 'border-[#3f3f46]' : 'border-gray-200'}`}>
         <input 
           type="text" 
           placeholder="Add a comment..." 
-          className="w-full text-sm placeholder-gray-500 focus:outline-none"
+          className={`w-full text-sm placeholder-gray-500 focus:outline-none ${isDark ? 'bg-[#0D0D0EFF] text-white' : 'bg-white text-black'}`}
         />
       </div>
 
       {/* 5. Timestamp */}
-      <p className="text-xs text-gray-500 px-3 pb-3 pt-1 uppercase">{timeAgo}</p>
-
+      <p className={`text-xs px-3 pb-3 pt-1 uppercase ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{timeAgo}</p>
     </div>
   );
 }
