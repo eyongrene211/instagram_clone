@@ -10,10 +10,9 @@ export default function HomePage() {
       <SignedOut>
         <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-zinc-900">
           <SignIn
-            path="/"                  // This page's path
-            routing="path"            // Use path-based routing
-            signUpUrl="/sign-up"      // Link to sign-up page
-            redirectUrl="/"           // Redirect here after sign-in
+            routing="hash"           // Use hash-based routing
+            signUpUrl="/sign-up"     // Link to your sign-up page
+            redirectUrl="/"          // Redirect here after sign-in
             appearance={{
               elements: {
                 formButtonPrimary: "bg-blue-500 hover:bg-blue-600",

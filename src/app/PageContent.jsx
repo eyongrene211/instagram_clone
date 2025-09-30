@@ -69,7 +69,7 @@ export default function PageContent() {
 
       <div className="flex flex-col flex-grow">
         {isMobile && (
-          <div className="p-4 bg-white dark:bg-zinc-800 border-b flex justify-between items-center sticky top-0 z-10">
+          <div className="p-4 bg-white dark:bg-black border-b flex justify-between items-center sticky top-0 z-10">
             <h1 className="text-xl font-semibold flex items-center gap-2">
               <FaInstagram />
               Instagram
