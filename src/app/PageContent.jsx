@@ -55,7 +55,7 @@ export default function PageContent() {
 
   return (
     <div
-      className={`flex min-h-screen w-full ${
+      className={`min-h-screen w-full ${
         isDark ? 'bg-zinc-900 text-white' : 'bg-gray-100 text-black'
       }`}
     >
@@ -67,36 +67,37 @@ export default function PageContent() {
         setIsMobileOpen={setIsMobileOpen}
       />
 
-      <div className="flex flex-col flex-grow">
-        {isMobile && (
-          <div className="p-4 bg-white dark:bg-black border-b flex justify-between items-center sticky top-0 z-10">
-            <h1 className="text-xl font-semibold flex items-center gap-2">
-              <FaInstagram />
-              Instagram
-            </h1>
-            <button onClick={() => setIsMobileOpen(true)} aria-label="Open menu">
-              <MenuIcon />
-            </button>
-          </div>
-        )}
-
-        <div className="w-full flex flex-grow">
-          <div
-            className={
-              isMobile ? 'p-4 overflow-auto' : 'lg:w-3/4 p-4 overflow-auto'
-            }
-          >
-            {ContentMap[currentPage] || <DashboardContent />}
-          </div>
-
-          {!isMobile && currentPage !== 'reports' && (
-            <aside className="lg:w-1/4 pl-8 pr-4 pt-8">
-              <div className="sticky top-6">
-                <SuggestionComponent />
-              </div>
-            </aside>
-          )}
+      {isMobile && (
+        <div className="p-4 bg-white dark:bg-black border-b flex justify-between items-center sticky top-0 z-10">
+          <h1 className="text-xl font-semibold flex items-center gap-2">
+            <FaInstagram />
+            Instagram
+          </h1>
+          <button onClick={() => setIsMobileOpen(true)} aria-label="Open menu">
+            <MenuIcon />
+          </button>
         </div>
+      )}
+
+      {/* Grid Layout */}
+      <div
+        className={`grid w-full ${
+          isMobile
+            ? 'grid-cols-1 gap-4 p-4'
+            : 'lg:grid-cols-[3fr_1fr] gap-8 p-4'
+        }`}
+      >
+        {/* Main Content */}
+        <main className="w-full">
+          {ContentMap[currentPage] || <DashboardContent />}
+        </main>
+
+        {/* Suggestions / Right Panel */}
+        {!isMobile && currentPage !== 'reports' && (
+          <aside className="sticky top-6">
+            <SuggestionComponent />
+          </aside>
+        )}
       </div>
     </div>
   );

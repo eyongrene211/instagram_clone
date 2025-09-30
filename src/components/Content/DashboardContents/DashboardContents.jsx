@@ -45,7 +45,7 @@ export default function DashboardContent() {
   return (
     <div className={`mx-auto w-full flex flex-col items-center relative ${isDark ? 'bg-zinc-900 text-white' : 'bg-white text-black'}`}>
       {/* Status Reel Container */}
-      <div className={`w-full max-w-[600px] border-b py-3 mb-6 sticky top-0 z-10 ${isDark ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-white'}`}>
+      <div className={`w-full max-w-[600px]  py-3 mb-6 sticky top-0 z-10 ${isDark ? 'border-zinc-700 bg-zinc-900' : 'border-gray-200 bg-white'}`}>
         <div className="px-2">
           <Swiper
             modules={[Autoplay, FreeMode]}
