@@ -15,9 +15,15 @@ import { RxHamburgerMenu }                        from 'react-icons/rx';
 import { FiSettings, FiLogOut, FiUser }           from 'react-icons/fi';
 import { AiOutlineClockCircle }                   from 'react-icons/ai';
 import { useTheme }                               from '../context/ThemeContext';
+// import localFont                                  from 'next/font/local';
 
 const COLLAPSE_DELAY_MS = 300;
 let collapseTimeout;
+
+// const billabong = localFont({
+//   src: '.../fonts/Billabong.otf', // relative to this file
+//   variable: '--font-billabong',
+// });
 
 const ProfileIcon = ({ user }) => {
   if (!user) return <div className="w-6 h-6 rounded-full bg-gray-200" />;
@@ -122,9 +128,14 @@ export default function MySideBar({
         <FaInstagram size={28} className={isDark ? 'text-white' : 'text-black'} />
       ) : (
         <h1
-          className={`text-2xl font-bold italic ${
+          className={`text-2xl font-bold   ${
             isDark ? 'text-white' : 'text-black'
-          }`}
+                          }`}
+                        style={{
+    fontFamily: 'Billabong, cursive',
+     
+    lineHeight: '1',
+  }}
         >
           Instagram
         </h1>

@@ -31,3 +31,10 @@ body {
         .animate-popover-in {
           animation: popoverIn 0.25s ease-out forwards;
         }
+
+        @font-face {
+  font-family: 'Billabong';
+  src: url('/fonts/Billabong.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
